@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
@@ -26,6 +27,16 @@ class MainActivity : AppCompatActivity(), MyAdapter.ItemClickListener {
         products.add(Product("MacBook M3 Max", "14-core CPU\n30-core GPU", 3499.00))
 
         val recyclerView: RecyclerView = findViewById(R.id.rvAnimals)
+        cal viewCart: Button = findViewById(R.id.view_cart)
+        viewCart.setOnClickListener(View.OnClickListener {
+            val productListStringBuilder = StringBuilder()
+            for (product in products) {
+                productListStringBuilder.append(product.productName).append("   ")
+            }
+            val productListString = productListStringBuilder.toString().trim()
+            Toast.makeText(this@MainActivity, productListString, Toast.LENGTH_LONG).show()
+
+        })
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MyAdapter(this, products, this)
         recyclerView.adapter = adapter
